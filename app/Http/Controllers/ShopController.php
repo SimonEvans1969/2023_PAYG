@@ -14,15 +14,17 @@ class ShopController extends Controller
      * @return \Illuminate\Http\Response
      *
     */
-    public function index()
+    public function index( Request $request )
     {
         // Redirect if no club context
         if (!$this->club) return redirect()->action([ShopController::class, 'pickClub']);
 
         // Get visible events
-        if( Auth::check() )
-        $events = Event::where('status','=',Event::OPEN)
-                       ->where
+        $query = Event::orderBy('name');
+        $query = $this->visibleToMe( $query, $request );
+        $events = $events->get();
+
+        return view( 'shop.index', [ 'events' => $events ]);
     }
 
     /**
@@ -35,7 +37,7 @@ class ShopController extends Controller
     {
         $clubs = Club::orderBy('name')->get();
 
-        return view( 'shop.clubs');
+        return view( 'shop.clubs', [ 'clubs' => $clubs ]);
     }
 
     /**

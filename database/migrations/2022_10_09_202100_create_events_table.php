@@ -27,6 +27,9 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->integer('capacity')->nullable();
+            $table->integer('available')->nullable();
+            $table->integer('wait_list')->nullable();
+            $table->integer('available_wait_list')->nullable();
             $table->integer('status');
             $table->timestamps();
             $table->unsignedBigInteger('created_by')->nullable();

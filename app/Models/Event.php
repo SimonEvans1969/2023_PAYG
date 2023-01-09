@@ -44,6 +44,9 @@ class Event extends BaseModel
         'start_date',
         'end_date',
         'capacity',
+        'wait_list',
+        'available',
+        'available_wait_list',
     ];
 
     /**
